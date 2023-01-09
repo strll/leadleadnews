@@ -1,0 +1,19 @@
+#全局端口定义server:
+# 全局字符集设置
+spring:
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+  aop:
+    proxy-target-class: true
+server:
+  tomcat:
+    uri-encoding: utf-8
+
+qiniuyu_common:
+  AccessKey: jZb5Szh8BQT_0uMF1HfCx2J-lVClrNGMNFjL_-px
+  SecretKey: A8I9Yhkw0leFvPVY6Yn502ek40sVZ86K7-z-JNog
+
+

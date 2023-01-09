@@ -1,0 +1,23 @@
+server:
+  port: 51802
+spring:
+  application:
+    name: leadnews-article
+  cloud:
+#    nacos:
+#      discovery:
+#        username: nacos
+#        password: wxt123456
+#        server-addr: 43.142.125.197:8848
+#      config:
+#        username: nacos
+#        password: wxt123456
+#        server-addr: 43.142.125.197:8848
+#        file-extension: yml
+#  cloud:
+    nacos:
+      discovery:
+        server-addr: 43.142.125.197:8848
+      config:
+        server-addr: 43.142.125.197:8848
+        file-extension: yml

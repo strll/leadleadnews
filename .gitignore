@@ -1,0 +1,12 @@
+# Project exclude paths
+/leadnews-basic/file-starter/target/
+/leadnews-common/target/
+/leadnews-gateway/leadnews-app-gateway/target/
+/leadnews-gateway/leadnews-wemedia-gateway/target/
+/leadnews-model/target/
+/leadnews-service/leadnews-article/target/
+/leadnews-service/leadnews-user/target/
+/leadnews-service/leadnews-wemedia/target/
+/leadnews-test/freemarker-demo/target/
+/leadnews-test/minio-demo/target/
+/leadnews-utils/target/
