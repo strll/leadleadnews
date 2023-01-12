@@ -44,11 +44,11 @@ public class AliyunTest {
     @Test
     public void testScanText() throws Exception {
 
-        Resopnse_Qiniuyun_JsonRootBean helloworld = qiNuYun_util.TextCensor("helloworld");
+        Resopnse_Qiniuyun_JsonRootBean helloworld = qiNuYun_util.TextCensor("啊啊啊啊");
         String s = helloworld.returnMessage_Mean();
         System.out.println(s);
         System.out.println(helloworld.toString());
-        Resopnse_Qiniuyun_JsonRootBean resopnse_qiniuyun_jsonRootBean = qiNuYun_util.ImageCensor("http://43.142.125.197:9000/bot/2023/01/09/67482f88c7db44d98b42ef7365e41abf");
+        Resopnse_Qiniuyun_JsonRootBean resopnse_qiniuyun_jsonRootBean = qiNuYun_util.ImageCensor("http://43.142.125.197:9000/leadnews/2022/12/22/fa62bea8b45741ada92854c52b405b5c.png");
         System.out.println(resopnse_qiniuyun_jsonRootBean.returnMessage_Mean());
 
 

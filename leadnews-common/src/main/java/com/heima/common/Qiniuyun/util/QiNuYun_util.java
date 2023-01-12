@@ -21,6 +21,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
@@ -60,7 +62,8 @@ public class QiNuYun_util {
         params.put("params", scenes);
 
         String paraR = gson.toJson(params);
-        byte[] bodyByte = paraR.getBytes();
+        byte[] bodyByte = new byte[0];
+        bodyByte = paraR.getBytes(StandardCharsets.UTF_8);
 
         // 接口请求地址//http://ai.qiniuapi.com/v3/text/censor
         String url = "http://ai.qiniuapi.com/v3/text/censor";
@@ -92,7 +95,8 @@ public class QiNuYun_util {
         params.put("params", scenes);
 
         String paraR = gson.toJson(params);
-        byte[] bodyByte = paraR.getBytes();
+        byte[] bodyByte = new byte[0];
+        bodyByte = paraR.getBytes(StandardCharsets.UTF_8);
 
         // 接口请求地址
         String url1 = "http://ai.qiniuapi.com/v3/image/censor";

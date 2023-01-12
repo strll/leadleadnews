@@ -3,9 +3,11 @@ import com.heima.common.Qiniuyun.util.QiNuYun_util;
 import com.qiniu.common.QiniuException;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
+
 public class Test2 {
     @Test
-    public void test() throws QiniuException {
+    public void test() throws QiniuException, UnsupportedEncodingException {
         QiNuYun_util qiNuYun_util = new QiNuYun_util();
         Resopnse_Qiniuyun_JsonRootBean helloworld = qiNuYun_util.TextCensor("helloworld");
         System.out.println(helloworld.toString());

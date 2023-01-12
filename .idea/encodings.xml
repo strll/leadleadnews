@@ -15,6 +15,8 @@
     <file url="file://$PROJECT_DIR$/leadnews-common/src/main/java/com/heima/common/tess4j" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-feign-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadnews-feign-api/src/main/java/com/apis/article/IArticleClient.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadnews-feign-api/src/main/java/com/apis/article/fallback" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-feign-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-gateway/leadnews-app-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-gateway/leadnews-app-gateway/src/main/resources" charset="UTF-8" />
@@ -27,6 +29,7 @@
     <file url="file://$PROJECT_DIR$/leadnews-model/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/heima-leadnews-user/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-article/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-article/src/main/java/article/mapper/ApArticleConfigMapper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-article/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-user/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-user/src/main/resources" charset="UTF-8" />
@@ -39,9 +42,11 @@
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/mapper/WmNewsMaterialMapper.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/service/WmChannelService.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/service/WmMaterialService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/service/WmNewsAutoScanService.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/service/WmNewsService.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/service/impl/WmChannelServiceImpl.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/service/impl/WmMaterialServiceImpl.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/service/impl/WmNewsAutoScanServiceImpl.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/service/impl/WmNewsServiceImpl.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/resources/mapper/WmNewsMaterialMapper.xml" charset="GBK" />
