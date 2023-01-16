@@ -22,6 +22,7 @@ import com.heima.utils.thread.WmThreadLocalUtil;
 import com.heima.wemedia.mapper.WmMaterialMapper;
 import com.heima.wemedia.mapper.WmNewsMapper;
 import com.heima.wemedia.mapper.WmNewsMaterialMapper;
+import com.heima.wemedia.service.WmNewsAutoScanService;
 import com.heima.wemedia.service.WmNewsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -48,45 +49,48 @@ public class WmNewsServiceImpl  extends ServiceImpl<WmNewsMapper, WmNews> implem
      * @param dto
      * @return
      */
+
+    @Autowired
+    private WmNewsAutoScanService wmNewsAutoScanService;
+
     @Override
     public ResponseResult findList(WmNewsPageReqDto dto) {
-        //1.������
-        //��ҳ���
+
         dto.checkParam();
 
-        //2.��ҳ������ѯ
+
         IPage page = new Page(dto.getPage(), dto.getSize());
         LambdaQueryWrapper<WmNews> lambdaQueryWrapper = new LambdaQueryWrapper();
-        //״̬��ȷ��ѯ
+
         if (dto.getStatus() != null) {
             lambdaQueryWrapper.eq(WmNews::getStatus, dto.getStatus());
         }
 
-        //Ƶ����ȷ��ѯ
+
         if (dto.getChannelId() != null) {
             lambdaQueryWrapper.eq(WmNews::getChannelId, dto.getChannelId());
         }
 
-        //ʱ�䷶Χ��ѯ
+
         if (dto.getBeginPubDate() != null && dto.getEndPubDate() != null) {
             lambdaQueryWrapper.between(WmNews::getPublishTime, dto.getBeginPubDate(), dto.getEndPubDate());
         }
 
-        //�ؼ��ֵ�ģ����ѯ
+
         if (StringUtils.isNotBlank(dto.getKeyword())) {
             lambdaQueryWrapper.like(WmNews::getTitle, dto.getKeyword());
         }
 
-        //��ѯ��ǰ��¼�˵�����
+
         lambdaQueryWrapper.eq(WmNews::getUserId, WmThreadLocalUtil.getUser().getId());
 
-        //���շ���ʱ�䵹���ѯ
+
         lambdaQueryWrapper.orderByDesc(WmNews::getPublishTime);
 
 
         page = page(page, lambdaQueryWrapper);
 
-        //3.�������
+
         ResponseResult responseResult = new PageResponseResult(dto.getPage(), dto.getSize(), (int) page.getTotal());
         responseResult.setData(page.getRecords());
 
@@ -99,66 +103,59 @@ public class WmNewsServiceImpl  extends ServiceImpl<WmNewsMapper, WmNews> implem
      * @param dto
      * @return
      */
+
+
+
     @Override
     public ResponseResult submitNews(WmNewsDto dto) {
 
-        //0.�����ж�
+
         if(dto == null || dto.getContent() == null){
             return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
         }
 
-        //1.������޸�����
+
 
         WmNews wmNews = new WmNews();
-        //���Կ��� �������ʺ�������ͬ���ܿ���
+
         BeanUtils.copyProperties(dto,wmNews);
-        //����ͼƬ  list---> string
+
         if(dto.getImages() != null && dto.getImages().size() > 0){
             //[1dddfsd.jpg,sdlfjldk.jpg]-->   1dddfsd.jpg,sdlfjldk.jpg
             String imageStr = StringUtils.join(dto.getImages(), ",");
             wmNews.setImages(imageStr);
         }
-        //�����ǰ��������Ϊ�Զ� -1
+
         if(dto.getType().equals(WemediaConstants.WM_NEWS_TYPE_AUTO)){
             wmNews.setType(null);
         }
 
         saveOrUpdateWmNews(wmNews);
 
-        //2.�ж��Ƿ�Ϊ�ݸ�  ���Ϊ�ݸ������ǰ����
+
         if(dto.getStatus().equals(WmNews.Status.NORMAL.getCode())){
             return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
         }
 
-        //3.���ǲݸ壬������������ͼƬ���زĵĹ�ϵ
-        //��ȡ�����������е�ͼƬ��Ϣ
+
+
         List<String> materials =  ectractUrlInfo(dto.getContent());
         saveRelativeInfoForContent(materials,wmNews.getId());
 
-        //4.���ǲݸ壬�������·���ͼƬ���زĵĹ�ϵ�������ǰ�������Զ�����Ҫƥ�����ͼƬ
+
         saveRelativeInfoForCover(dto,wmNews,materials);
+        wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
 
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
 
     }
 
-    /**
-     * ��һ�����ܣ������ǰ��������Ϊ�Զ��������÷������͵�����
-     * ƥ�����
-     * 1���������ͼƬ���ڵ���1��С��3  ��ͼ  type 1
-     * 2���������ͼƬ���ڵ���3  ��ͼ  type 3
-     * 3���������û��ͼƬ����ͼ  type 0
-     *
-     * �ڶ������ܣ��������ͼƬ���زĵĹ�ϵ
-     * @param dto
-     * @param wmNews
-     * @param materials
-     */
+
     private void saveRelativeInfoForCover(WmNewsDto dto, WmNews wmNews, List<String> materials) {
 
         List<String> images = dto.getImages();
 
-        //�����ǰ��������Ϊ�Զ��������÷������͵�����
+
         if(dto.getType().equals(WemediaConstants.WM_NEWS_TYPE_AUTO)){
             //��ͼ
             if(materials.size() >= 3){

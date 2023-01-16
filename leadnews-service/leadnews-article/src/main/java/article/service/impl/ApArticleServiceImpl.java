@@ -5,6 +5,7 @@ import article.mapper.ApArticleContentMapper;
 import article.mapper.ApArticleMapper;
 
 import article.service.ApArticleService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
@@ -83,6 +84,7 @@ public class ApArticleServiceImpl  extends ServiceImpl<ApArticleMapper, ApArticl
 
     @Override
     public ResponseResult saveArticle(ArticleDto dto) {
+
         //1.检查参数
         if(dto == null){
             return ResponseResult.errorResult(AppHttpCodeEnum.PARAM_INVALID);
@@ -113,9 +115,13 @@ public class ApArticleServiceImpl  extends ServiceImpl<ApArticleMapper, ApArticl
 
             //修改  文章
             updateById(apArticle);
+            QueryWrapper<ApArticleContent> apArticleContentQueryWrapper = new QueryWrapper<>();
+            apArticleContentQueryWrapper.eq("article_id",apArticle.getId());
 
             //修改文章内容
-            ApArticleContent apArticleContent = apArticleContentMapper.selectOne(Wrappers.<ApArticleContent>lambdaQuery().eq(ApArticleContent::getArticleId, dto.getId()));
+            ApArticleContent apArticleContent = apArticleContentMapper.selectOne(apArticleContentQueryWrapper);
+
+
             apArticleContent.setContent(dto.getContent());
             apArticleContentMapper.updateById(apArticleContent);
         }

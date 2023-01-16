@@ -42,7 +42,7 @@ public class getSign {
 
         Auth auth = Auth.create(accessKey, secretKey);
         String qiniuToken = "Qiniu " + auth.signRequestV2(url, method, s.getBytes(), contentType);
-        log.info("url={},body={},qiniuToken={}",url,s,qiniuToken);
+      //  log.info("url={},body={},qiniuToken={}",url,s,qiniuToken);
         return  qiniuToken;
     }
 }

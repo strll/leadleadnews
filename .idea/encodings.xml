@@ -34,6 +34,7 @@
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-user/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-user/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/config/InitConfig.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/controller/v1/WmMaterialController.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/controller/v1/WmchannelController.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/leadnews-service/leadnews-wemedia/src/main/java/com/heima/wemedia/mapper/WmChannelMapper.java" charset="UTF-8" />

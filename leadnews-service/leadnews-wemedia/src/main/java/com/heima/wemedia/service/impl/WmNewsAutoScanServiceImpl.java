@@ -38,15 +38,25 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-@Service
+
 @Slf4j
 @Transactional
+@Service
 public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService {
 
     @Autowired
     private WmNewsMapper wmNewsMapper;
     @Autowired
     private QiNuYun_util qiNuYun_util;
+
+    @Autowired
+    private IArticleClient articleClient;
+
+    @Autowired
+    private WmChannelMapper wmChannelMapper;
+
+    @Autowired
+    private WmUserMapper wmUserMapper;
 
     @Autowired
     private QiniuyunUtil qi;
@@ -75,17 +85,6 @@ public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService {
             //自管理的敏感词过滤
             boolean isSensitive = handleSensitiveScan((String) textAndImages.get("content"), wmNews);
             if (!isSensitive) return;
-
-            //2.审核文本内容
-//            try {
-//                Resopnse_Qiniuyun_JsonRootBean content = qiNuYun_util.TextCensor((String) textAndImages.get("content"));
-//                String s = content.returnMessage();
-//                if(s!="yes"){
-//                    return;
-//                }
-//            } catch (QiniuException e) {
-//                e.printStackTrace();
-//            }
             boolean isTextScan = handleTextScan((String) textAndImages.get("content"), wmNews);
             if (!isTextScan) return;
 
@@ -93,24 +92,12 @@ public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService {
             boolean isImageScan = handleImageScan((List<String>) textAndImages.get("images"), wmNews);
            if (!isImageScan) return;
 
-//            for (String images : (List<String>) textAndImages.get("images")) {
-//                try {
-//                    Resopnse_Qiniuyun_JsonRootBean resopnse_qiniuyun_jsonRootBean = qiNuYun_util.ImageCensor(images);
-//                    String s = resopnse_qiniuyun_jsonRootBean.returnMessage();
-//                    if(s!="yes"){
-//                        return;
-//                    }
-//                } catch (QiniuException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-
 
 
 
 
             //4.审核成功，保存app端的相关的文章数据
-            ResponseResult responseResult = saveAppArticle(wmNews);
+             ResponseResult responseResult = saveAppArticle(wmNews);
             if (!responseResult.getCode().equals(200)) {
                 throw new RuntimeException("WmNewsAutoScanServiceImpl-文章审核，保存app端相关文章数据失败");
             }
@@ -162,14 +149,7 @@ public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService {
         return flag;
     }
 
-    @Autowired
-    private IArticleClient articleClient;
 
-    @Autowired
-    private WmChannelMapper wmChannelMapper;
-
-    @Autowired
-    private WmUserMapper wmUserMapper;
 
     /**
      * 保存app端相关的文章数据
@@ -203,6 +183,7 @@ public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService {
         dto.setCreatedTime(new Date());
 
         ResponseResult responseResult = articleClient.saveArticle(dto);
+
         return responseResult;
 
     }
