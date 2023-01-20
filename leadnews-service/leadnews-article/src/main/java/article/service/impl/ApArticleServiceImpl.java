@@ -5,6 +5,7 @@ import article.mapper.ApArticleContentMapper;
 import article.mapper.ApArticleMapper;
 
 import article.service.ApArticleService;
+import article.service.ArticleFreemarkerService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -36,6 +37,9 @@ public class ApArticleServiceImpl  extends ServiceImpl<ApArticleMapper, ApArticl
 
     // 单页最大加载的数字
     private final static short MAX_PAGE_SIZE = 50;
+
+    @Autowired
+    private ArticleFreemarkerService articleFreemarkerService;
 
     @Autowired
     private ApArticleMapper apArticleMapper;
@@ -125,7 +129,7 @@ public class ApArticleServiceImpl  extends ServiceImpl<ApArticleMapper, ApArticl
             apArticleContent.setContent(dto.getContent());
             apArticleContentMapper.updateById(apArticleContent);
         }
-
+      articleFreemarkerService.buildArticleToMinIO(apArticle, dto.getContent());
         //3.结果返回  文章的id
         return ResponseResult.okResult(apArticle.getId());
     }

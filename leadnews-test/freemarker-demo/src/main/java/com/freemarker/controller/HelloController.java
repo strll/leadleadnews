@@ -1,7 +1,12 @@
 package com.freemarker.controller;
 
 import com.freemarker.entity.Student;
+
+
 import org.springframework.stereotype.Controller;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 

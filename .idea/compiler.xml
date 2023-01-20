@@ -10,14 +10,15 @@
         <module name="freemarker-demo" />
         <module name="leadnews-common" />
         <module name="minio-demo" />
-        <module name="leadnews-feign-api" />
-        <module name="leadnews-utils" />
-        <module name="leadnews-wemedia-gateway" />
         <module name="leadnews-model" />
+        <module name="tess4j-demo" />
         <module name="leadnews-article" />
         <module name="leadnews-app-gateway" />
         <module name="leadnews-user" />
         <module name="file-starter" />
+        <module name="leadnews-feign-api" />
+        <module name="leadnews-utils" />
+        <module name="leadnews-wemedia-gateway" />
         <module name="leadnews-wemedia" />
       </profile>
     </annotationProcessing>
@@ -49,6 +50,7 @@
       <module name="leadnews-wemedia-gateway" target="1.8" />
       <module name="lendnews-service" target="1.8" />
       <module name="minio-demo" target="1.8" />
+      <module name="tess4j-demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -79,6 +81,7 @@
       <module name="leadnews-wemedia-gateway" options="-parameters" />
       <module name="lendnews-service" options="" />
       <module name="minio-demo" options="-parameters" />
+      <module name="tess4j-demo" options="-parameters" />
     </option>
   </component>
 </project>

@@ -16,6 +16,7 @@
         <option value="$PROJECT_DIR$/leadnews-basic/pom.xml" />
         <option value="$PROJECT_DIR$/leadnews-service/leadnews-wemedia/pom.xml" />
         <option value="$PROJECT_DIR$/leadnews-gateway/leadnews-wemedia-gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/leadnews-test/tess4j-demo/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

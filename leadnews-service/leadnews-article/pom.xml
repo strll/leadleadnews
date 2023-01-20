@@ -12,6 +12,11 @@
     <artifactId>leadnews-article</artifactId>
 <dependencies>
     <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-freemarker</artifactId>
+    </dependency>
+
+    <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>8.0.30</version>
@@ -24,6 +29,18 @@
     <dependency>
         <groupId>com.squareup.okhttp3</groupId>
         <artifactId>okhttp</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.heima</groupId>
+        <artifactId>file-starter</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.heima</groupId>
+        <artifactId>file-starter</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <scope>compile</scope>
     </dependency>
 </dependencies>
 
